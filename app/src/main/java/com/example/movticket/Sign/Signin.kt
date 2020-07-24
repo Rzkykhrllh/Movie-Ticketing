@@ -30,10 +30,7 @@ class Signin : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("User")
         preferences = Prefences(this)
 
-        preferences.setValue(
-            "Onboarding",
-            "1"
-        ) //nandain bahwa sudah pernah ke halaman sign in, jadi nanti onboarding gausah liat lagi
+        preferences.setValue("Onboarding", "1") //nandain bahwa sudah pernah ke halaman sign in, jadi nanti onboarding gausah liat lagi
 
         //ngecek apakah udah pernah login sebelumnya, kalau udah langsung ke home
         if (preferences.getValue("status").equals("1")) {
@@ -47,19 +44,16 @@ class Signin : AppCompatActivity() {
             iPassword = et_pass.text.toString()
 
             if (iUsername.equals("")) {
-                et_usrnm.error =
-                    "Silahkan masukan username anda" //ngasih muncul peringatan bahwa teksnya kosong
+                et_usrnm.error = "Silahkan masukan username anda" //ngasih muncul peringatan bahwa teksnya kosong
                 et_usrnm.requestFocus() //biar fokus
             } else
                 if (iPassword.equals("")) {
-                    et_pass.error =
-                        "Silahkan masukan password anda" //ngasih muncul peringatan bahwa teksnya kosong
+                    et_pass.error = "Silahkan masukan password anda" //ngasih muncul peringatan bahwa teksnya kosong
                     et_pass.requestFocus() //biar fokus
                 } else {
                     pushLogin(iUsername, iPassword)
                 }
         }
-
         btn_buatakun.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))
         }
@@ -70,6 +64,7 @@ class Signin : AppCompatActivity() {
         database.child(username).addValueEventListener(
 
             object : ValueEventListener {
+
                 override fun onCancelled(databaseerror: DatabaseError) {
                     Toast.makeText(this@Signin, "Database Error", Toast.LENGTH_LONG).show()
                 }
@@ -96,16 +91,11 @@ class Signin : AppCompatActivity() {
 
                             startActivity(Intent(this@Signin, HomeActivity::class.java))
                         } else {
-                            Toast.makeText(
-                                this@Signin, "Password anda salah",
-                                Toast.LENGTH_LONG
-                            ).show()
-
+                            Toast.makeText(this@Signin, "Password anda salah", Toast.LENGTH_LONG).show()
                         }
-
                     }
-
                 }
-            })
+            }
+        )
     }
 }

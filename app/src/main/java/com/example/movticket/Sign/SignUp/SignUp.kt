@@ -37,7 +37,6 @@ class SignUp : AppCompatActivity() {
             sEmail = et_email.text.toString()
             sNama = et_nama.text.toString()
 
-
             emptyValidation(sUsername, sPassword, sNama, sEmail)
 
         }
@@ -71,6 +70,7 @@ class SignUp : AppCompatActivity() {
         user.nama = nama
         user.email = email
 
+        // apabila username diisi oleh user (tidak null)
         if (username != null){
             chekingUsername(username, user)
         }
@@ -78,29 +78,32 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun chekingUsername(username: String, data: User) {
-        mDatabaseReference.child(username).addValueEventListener(object : ValueEventListener{
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(this@SignUp, ""+databaseError.message, Toast.LENGTH_LONG).show()
-            }
+        mDatabaseReference.child(username).addValueEventListener(
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var user = dataSnapshot.getValue(User::class.java)
+            object : ValueEventListener{
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(this@SignUp, ""+databaseError.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var user = dataSnapshot.getValue(User::class.java)
 
 
-                //Apabila username sudah digunakan  oleh pengguna lain
-                if (user == null){
-                    //belum pernah dibuat
-                    mDatabaseReference.child(username).setValue(data)
+                    //Apabila username sudah digunakan  oleh pengguna lain
+                    if (user == null){
+                        //belum pernah dibuat
+                        mDatabaseReference.child(username).setValue(data)
 
-                    startActivity(Intent(this@SignUp,
-                        SignUpPhoto::class.java).putExtra("nama", data?.nama))
-                } else{
-                    //User pernah dibuat
-                    Toast.makeText(this@SignUp, "User sudah pernah dibuat", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@SignUp,
+                            SignUpPhoto::class.java).putExtra("nama", data?.nama))
+                    } else{
+                        //User pernah dibuat
+                        Toast.makeText(this@SignUp, "User sudah pernah dibuat", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-
-        })
+        )
     }
 }
