@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "237085024200",
+    "firebase_url": "https://movie-ticket-28299.firebaseio.com",
+    "project_id": "movie-ticket-28299",
+    "storage_bucket": "movie-ticket-28299.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237085024200:android:eb4953974452580af2eafd",
+        "android_client_info": {
+          "package_name": "com.example.movticket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237085024200-1ulctk8butgasgsr5s10b7i8ck208e20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.movticket",
+            "certificate_hash": "286d9d491843614535c74edc2e6f1d8b2441c84d"
+          }
+        },
+        {
+          "client_id": "237085024200-4992ah1o8k7nqmv9pt9rmdghj1snq180.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7_6TIqBTHABHVshQqQvFMvgT5ToX4_Zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237085024200-4992ah1o8k7nqmv9pt9rmdghj1snq180.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
