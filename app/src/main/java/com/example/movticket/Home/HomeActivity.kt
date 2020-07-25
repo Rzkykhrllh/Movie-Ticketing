@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.example.movticket.Home.Dashboard.DashboardFragment
+import com.example.movticket.Home.Dashboard.*
 import com.example.movticket.R
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -14,8 +14,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         //set default fragment
-        val fragmentHome =
-            DashboardFragment()
+        val fragmentHome = DashboardFragment()
         changeIcon(btn_menu1, R.drawable.menu_true)
         setFragment(fragmentHome)
 

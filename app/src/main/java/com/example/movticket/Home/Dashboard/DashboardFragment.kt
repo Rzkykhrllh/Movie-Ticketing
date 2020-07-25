@@ -23,7 +23,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var preferences : Prefences
     private lateinit var mDatabase : DatabaseReference
-    private var dataList : ArrayList<Film>()
+    private var dataList : ArrayList<Film> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +64,12 @@ class DashboardFragment : Fragment() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+
+                for (getdatasnapshot in dataSnapshot.children){
+                    var film =  getdatasnapshot.getValue(Film::class.java)
+                    dataList.add(film!!)
+                }
+
                 dataList.clear()
                 for (getdatasnapshot in dataSnapshot.children){
                     var film =  getdatasnapshot.getValue(Film::class.java)
@@ -73,17 +79,16 @@ class DashboardFragment : Fragment() {
                 rv_now.adapter = NowPlayingAdapter(dataList){
 
                 }
-                rv_coming.adapter = ComingSoonAdapter(dataList){
-
-                }
+               // rv_coming.adapter = ComingSoonAdapter(dataList){
+                //}
             }
 
         })
     }
 
-    private fun currency(harga: Double, textView: TextView){
+    private fun currency(harga: Double?, textView: TextView){
         //fungsi untuk konversi currency
-        val localID : Locale("in","IDR")
+        val localID = Locale("in","IDR")
         val format = NumberFormat.getCurrencyInstance(localID)
         textView.setText(format.format(harga))
     }
