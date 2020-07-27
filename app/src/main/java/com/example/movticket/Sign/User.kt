@@ -6,6 +6,6 @@ class User {
     var password: String? = ""
     var url: String? = ""
     var username: String? = ""
-    var saldo: String? = ""
+    var saldo: String? = "0"
 
 }

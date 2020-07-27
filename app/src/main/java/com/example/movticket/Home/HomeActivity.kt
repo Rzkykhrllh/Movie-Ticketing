@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
 
         btn_menu3.setOnClickListener {
             setFragment(ProfileFragment())
-            changeIcon(btn_menu1, R.drawable.menu_true)
+            changeIcon(btn_menu1, R.drawable.menu_false)
             changeIcon(btn_menu2, R.drawable.tiket_false)
             changeIcon(btn_menu3, R.drawable.profile_true)
         }

@@ -1,6 +1,7 @@
 package com.example.movticket.Home.Dashboard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,9 +42,16 @@ class DashboardFragment : Fragment() {
 
         tv_nama.setText(preferences.getValue("nama")) //ambil data nama dari preference
 
-        if (preferences.getValue("saldo").equals("")){ //ambil data saldo dari preference
-            currency(preferences.getValue("saldo")?.toDouble(), tv_saldo)
+       /* println("Teteh")
+        Log.d("T", "for Teteh")
+        var angka : Double? = preferences.getValue("saldo")?.toDouble()
+        println("Punten")
+        Log.d("p", "for punten")*/
+
+        if (!preferences.getValue("saldo").equals("")){ //ambil data saldo dari preference
+           currency(preferences.getValue("saldo")!!.toDouble(), tv_saldo)
         }
+        Log.d("T", "for Teteh")
 
         Glide.with(this) //ambil data gambar dari preference
             .load(preferences.getValue("url"))
@@ -52,6 +60,7 @@ class DashboardFragment : Fragment() {
 
         rv_now.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) //ngeset recycler view
         rv_coming.layoutManager = LinearLayoutManager(context) //set recylerview vertical
+
 
         getData() // ambil data film dari database
     }
@@ -79,17 +88,23 @@ class DashboardFragment : Fragment() {
                 rv_now.adapter = NowPlayingAdapter(dataList){
 
                 }
-               // rv_coming.adapter = ComingSoonAdapter(dataList){
-                //}
+
+                rv_coming.adapter = ComingSoonAdapter(dataList){
+                }
             }
 
         })
     }
-    private fun currency(harga: Double?, textView: TextView){
+    private fun currency(harga: Double, textView: TextView){
         //fungsi untuk konversi currency
         val localID = Locale("in","IDR")
+        Log.d("eror","1")
+
         val format = NumberFormat.getCurrencyInstance(localID)
+        Log.d("eror","2")
+
         textView.setText(format.format(harga))
+        Log.d("eror","3")
     }
 
 }

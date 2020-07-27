@@ -26,7 +26,7 @@ class NowPlayingAdapter(private var data: List<Film>,
         val imgPoster : ImageView = view.findViewById(R.id.img_poster_now)
 
         fun bindItem(data:Film, listener:(Film) -> Unit, context: Context){
-            tvJudul.setText(data.nama)
+            tvJudul.setText(data.judul)
             tvGenre.setText(data.genre)
             tvRating.setText(data.rating)
 
