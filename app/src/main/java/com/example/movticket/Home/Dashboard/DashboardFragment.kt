@@ -85,7 +85,6 @@ class DashboardFragment : Fragment() {
 
         })
     }
-
     private fun currency(harga: Double?, textView: TextView){
         //fungsi untuk konversi currency
         val localID = Locale("in","IDR")
