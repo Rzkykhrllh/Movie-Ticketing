@@ -1,5 +1,6 @@
 package com.example.movticket.Home.Dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.movticket.Buying.DetailActivity
 import com.example.movticket.Model.Film
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
@@ -86,10 +88,13 @@ class DashboardFragment : Fragment() {
                 }
 
                 rv_now.adapter = NowPlayingAdapter(dataList){
-
+                    var intent : Intent = Intent(context, DetailActivity::class.java).putExtra("data", it)
+                    startActivity(intent)
                 }
 
                 rv_coming.adapter = ComingSoonAdapter(dataList){
+                    var intent : Intent = Intent(context, DetailActivity::class.java).putExtra("data", it)
+                    startActivity(intent)
                 }
             }
 

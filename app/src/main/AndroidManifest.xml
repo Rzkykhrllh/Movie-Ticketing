@@ -29,8 +29,8 @@
         <activity android:name=".MyWalletActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".CheckoutActivity" />
-        <activity android:name=".PilihBangkuActivity" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".Buying.PilihBangkuActivity" />
+        <activity android:name=".Buying.DetailActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Sign.SignUp.SignUp" />
         <activity android:name=".Sign.SignUp.SignUpPhoto" />

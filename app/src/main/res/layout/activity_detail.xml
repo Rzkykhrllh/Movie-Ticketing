@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgbiru"
-    tools:context=".DetailActivity">
+    tools:context=".Buying.DetailActivity">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/img_poster"
         android:layout_width="0dp"
         android:layout_height="280dp"
         android:scaleType="fitXY"
@@ -18,19 +18,20 @@
         app:srcCompat="@drawable/poster" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tv_judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:text="Violet Evegarden : The Movie"
+        android:drawablePadding="20dp"
         android:textColor="@color/putih"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/img_poster" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tv_genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -39,7 +40,20 @@
         android:textColor="@color/putih"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_judul" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="4dp"
+        android:text="9.2"
+        android:textColor="@color/putih"
+        android:textSize="12sp"
+        android:drawableLeft="@drawable/ic_star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_judul" />
 
     <TextView
         android:id="@+id/textView15"
@@ -50,10 +64,10 @@
         android:text="Story Board"
         android:textColor="@color/putih"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tv_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -75,9 +89,10 @@
         android:text="Who's Behind"
         android:textColor="@color/putih"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_who"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
@@ -88,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_pilih_bangku"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
