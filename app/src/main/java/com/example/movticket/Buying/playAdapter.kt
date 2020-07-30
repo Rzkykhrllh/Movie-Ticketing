@@ -1,4 +1,4 @@
-package com.example.movticket.Home.Dashboard
+package com.example.movticket.Buying
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movticket.Model.Plays
 import com.example.movticket.R
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.row_item_plays.*
 
 class playAdapter(private var data: List<Plays>,
                   private val listener: (Plays) -> Unit)
@@ -37,7 +35,7 @@ class playAdapter(private var data: List<Plays>,
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): playAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         contextAdapter = parent.context
         val inflatedView = layoutInflater.inflate(R.layout.row_item_plays, parent, false)

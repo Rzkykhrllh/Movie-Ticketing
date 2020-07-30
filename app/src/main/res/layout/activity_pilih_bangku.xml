@@ -11,7 +11,8 @@
 
 
     <Button
-        android:id="@+id/button22"
+        android:visibility="invisible"
+        android:id="@+id/btn_pilih"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

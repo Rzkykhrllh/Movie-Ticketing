@@ -44,11 +44,6 @@ class DashboardFragment : Fragment() {
 
         tv_nama.setText(preferences.getValue("nama")) //ambil data nama dari preference
 
-       /* println("Teteh")
-        Log.d("T", "for Teteh")
-        var angka : Double? = preferences.getValue("saldo")?.toDouble()
-        println("Punten")
-        Log.d("p", "for punten")*/
 
         if (!preferences.getValue("saldo").equals("")){ //ambil data saldo dari preference
            currency(preferences.getValue("saldo")!!.toDouble(), tv_saldo)
