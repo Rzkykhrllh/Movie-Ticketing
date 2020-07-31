@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.movticket.Home.Dashboard.*
+import com.example.movticket.Home.Tiket.TiketFragment
 import com.example.movticket.R
 import kotlinx.android.synthetic.main.activity_home.*
 
