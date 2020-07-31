@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.movticket.Home.Dashboard.*
 import com.example.movticket.Home.Tiket.TiketFragment
+import com.example.movticket.Home.setting.setting
 import com.example.movticket.R
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -34,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         btn_menu3.setOnClickListener {
-            setFragment(ProfileFragment())
+            setFragment(setting())
             changeIcon(btn_menu1, R.drawable.menu_false)
             changeIcon(btn_menu2, R.drawable.tiket_false)
             changeIcon(btn_menu3, R.drawable.profile_true)

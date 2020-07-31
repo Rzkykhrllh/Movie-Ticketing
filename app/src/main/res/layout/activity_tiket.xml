@@ -18,13 +18,13 @@
         app:srcCompat="@drawable/back_putih_24" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/img_popup"
         android:layout_width="0dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@color/putih" />
+        android:src="@color/putih" />
 
     <ImageView
         android:id="@+id/bgputih"
@@ -32,9 +32,9 @@
         android:layout_height="60dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
-        tools:srcCompat="@drawable/qrcode" />
+        app:layout_constraintEnd_toEndOf="@+id/img_popup"
+        app:layout_constraintTop_toTopOf="@+id/img_popup"
+        android:src="@drawable/qrcode" />
 
      <TextView
         android:id="@+id/scanqr"
