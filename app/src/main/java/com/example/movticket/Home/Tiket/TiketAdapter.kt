@@ -25,7 +25,7 @@ class TiketAdapter(private var data: List<Checkout>,
         val tvKursi: TextView = view.findViewById(R.id.tv_kursi2)
 
         fun bindItem(data:Checkout, listener:(Checkout) -> Unit, context: Context){
-            tvKursi.text = "Seat No. "+data.kursi
+            tvKursi.setText("Seat No. ${data.kursi}")
         }
 
     }
@@ -33,6 +33,7 @@ class TiketAdapter(private var data: List<Checkout>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         contextAdapter = parent.context
+
         val inflatedView = layoutInflater.inflate(R.layout.row_item_checkout_white, parent, false)
         return ViewHolder(inflatedView)
     }

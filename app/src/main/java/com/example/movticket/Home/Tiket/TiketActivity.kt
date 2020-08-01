@@ -4,18 +4,21 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movticket.Model.Checkout
 import com.example.movticket.Model.Film
 import com.example.movticket.R
 import kotlinx.android.synthetic.main.activity_tiket.*
 import kotlinx.android.synthetic.main.pop_up_view.*
+import java.util.zip.Inflater
 
 class TiketActivity : AppCompatActivity() {
 
     private var dataList = ArrayList<Checkout>()
-    private lateinit var myDialog : Dialog
+    private lateinit var dialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,32 +34,34 @@ class TiketActivity : AppCompatActivity() {
             .load(data.poster)
             .into(img_poster)
 
+        dataList.clear()
         dataList.add(Checkout("A1", ""))
         dataList.add(Checkout("A2", ""))
 
+        rv_seats.layoutManager = LinearLayoutManager(this)
         rv_seats.adapter = TiketAdapter(dataList){
 
         }
 
-        myDialog = Dialog(this)
 
-/*        img_popup.setOnClickListener{
-            myDialog.setContentView(R.layout.pop_up_view)
+        img_popup.setOnClickListener{
 
-            pop_tutup.setOnClickListener {
-                myDialog.dismiss()
+            dialog = Dialog(this)
+            var inflater : LayoutInflater = getLayoutInflater();
+            var dialogView = inflater.inflate(R.layout.pop_up_view, null);
+            dialog.setContentView(dialogView);
+            dialog.setCancelable(true);
+            dialog.setTitle("Form Biodata");
+
+            Log.d("Teteh", "anata wo doko desu ka?")
+            pop_tutup?.setOnClickListener {
+                Log.d("Teteh", "Kimi wo doko desu ka?")
+                dialog.dismiss()
             }
-            myDialog.show()
-        }*/
+            dialog.show()
+        }
 
     }
 
-    /*fun Popup(view: View) {
-        myDialog.setContentView(R.layout.pop_up_view)
 
-        pop_tutup.setOnClickListener {
-            myDialog.dismiss()
-        }
-        myDialog.show()
-    }*/
 }

@@ -13,7 +13,9 @@ import kotlinx.android.synthetic.main.activity_pilih_bangku.*
 class PilihBangkuActivity : AppCompatActivity() {
 
     var statusA1 = false
+    var clickedA1 = false
     var statusA2 = false
+    var clickedA2 = false
     var total = 0
 
     private var datalist = ArrayList<Checkout>()
@@ -34,14 +36,17 @@ class PilihBangkuActivity : AppCompatActivity() {
                 statusA1 = false
                 total--
                 beliTiket(total)
+                hapus("A1")
             }else{
                 A1.setImageResource(R.drawable.ic_selected)
                 statusA1 = true
                 total++
                 beliTiket(total)
 
-                val data = Checkout("A1", "35000")
-                datalist.add(data)
+                if (!clickedA1){
+                    val data = Checkout("A1", "35000")
+                    datalist.add(data)
+                }
             }
         }
         A2.setOnClickListener {
@@ -51,19 +56,32 @@ class PilihBangkuActivity : AppCompatActivity() {
                 statusA2 = false
                 total--
                 beliTiket(total)
+                hapus("A2")
             }else{
                 A2.setImageResource(R.drawable.ic_selected)
                 statusA2 = true
                 total++
                 beliTiket(total)
 
-                val data = Checkout("A2", "35000")
-                datalist.add(data)
+                if (!clickedA2){
+                    val data = Checkout("A2", "35000")
+                    datalist.add(data)
+                }
             }
         }
 
         btn_pilih.setOnClickListener {
             startActivity(Intent(this, CheckoutActivity::class.java).putExtra("data",datalist))
+        }
+    }
+
+    private fun hapus(s: String) {
+
+        for ((i,item) in datalist.withIndex()){
+            if (item.kursi!!.endsWith(s)){
+                datalist.removeAt(i)
+                break
+            }
         }
     }
 
