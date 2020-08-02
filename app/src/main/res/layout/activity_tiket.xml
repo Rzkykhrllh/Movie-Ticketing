@@ -8,7 +8,7 @@
     tools:context=".Home.Tiket.TiketActivity">
 
     <ImageView
-        android:id="@+id/img_back"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -69,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_back"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
         app:srcCompat="@drawable/shape_rectangle_white" />
 
     <ImageView

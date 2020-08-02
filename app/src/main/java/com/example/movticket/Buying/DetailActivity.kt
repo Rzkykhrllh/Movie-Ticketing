@@ -44,6 +44,10 @@ class DetailActivity : AppCompatActivity() {
             startActivity(Intent(this, PilihBangkuActivity::class.java).putExtra("data", data))
         }
 
+        btn_back.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun getdata() {

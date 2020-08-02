@@ -29,7 +29,9 @@ class CheckoutActivity : AppCompatActivity() {
 
         rv_bangku.layoutManager = LinearLayoutManager(this)
         rv_bangku.adapter = CheckoutAdapter(dataList){
-
+        }
+        btn_back.setOnClickListener{
+            finish()
         }
     }
 }

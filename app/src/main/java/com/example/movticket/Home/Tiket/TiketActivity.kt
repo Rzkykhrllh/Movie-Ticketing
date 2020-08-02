@@ -43,6 +43,9 @@ class TiketActivity : AppCompatActivity() {
 
         }
 
+        btn_back.setOnClickListener {
+            finish()
+        }
 
         img_popup.setOnClickListener{
 

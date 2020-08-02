@@ -33,10 +33,10 @@ class setting : Fragment() {
         tv_nama.text = preferences.getValue("nama")
         tv_email.text = preferences.getValue("email")
 
-            Glide.with(this)
+            /*Glide.with(this)
                 .load(preferences.getValue("url"))
                 .apply(RequestOptions.circleCropTransform())
-                .into(img_profile)
+                .into(img_profile)*/
 
 
     }

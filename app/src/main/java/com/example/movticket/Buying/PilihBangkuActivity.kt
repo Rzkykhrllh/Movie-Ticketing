@@ -73,6 +73,10 @@ class PilihBangkuActivity : AppCompatActivity() {
         btn_pilih.setOnClickListener {
             startActivity(Intent(this, CheckoutActivity::class.java).putExtra("data",datalist))
         }
+
+        btn_back.setOnClickListener{
+            finish()
+        }
     }
 
     private fun hapus(s: String) {
