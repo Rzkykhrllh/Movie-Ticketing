@@ -94,10 +94,13 @@ class SignUp : AppCompatActivity() {
                     //Apabila username sudah digunakan  oleh pengguna lain
                     if (user == null){
                         //belum pernah dibuat
-                        mDatabaseReference.child(username).setValue(data)
+                        mDatabaseReference.child(username).setValue(data) //upload data ke firebase
 
-                        startActivity(Intent(this@SignUp,
-                            SignUpPhoto::class.java).putExtra("nama", data?.nama))
+
+                        startActivity(Intent(this@SignUp, SignUpPhoto::class.java)
+                            .putExtra("nama", data.nama)
+                            .putExtra("uname", data.username)
+                        )
                     } else{
                         //User pernah dibuat
                         Toast.makeText(this@SignUp, "User sudah pernah dibuat", Toast.LENGTH_LONG).show()

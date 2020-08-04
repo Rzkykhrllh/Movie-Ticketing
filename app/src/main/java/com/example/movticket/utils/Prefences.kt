@@ -18,7 +18,7 @@ class Prefences(val context: Context) {
     }
 
     fun getValue(key: String): String?{
-        return sharedPreferences.getString(key,null)
+        return sharedPreferences.getString(key,"")
     }
 
 }

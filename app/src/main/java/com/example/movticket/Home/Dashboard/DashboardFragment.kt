@@ -50,6 +50,7 @@ class DashboardFragment : Fragment() {
         }
         Log.d("T", "for Teteh")
 
+
         Glide.with(this) //ambil data gambar dari preference
             .load(preferences.getValue("url"))
             .apply(RequestOptions.circleCropTransform())

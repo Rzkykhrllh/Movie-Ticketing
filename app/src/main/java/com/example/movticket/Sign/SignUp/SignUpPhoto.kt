@@ -23,7 +23,9 @@ import kotlinx.android.synthetic.main.activity_sign_up_photo.*
 import java.util.*
 import android.app.ProgressDialog
 import android.util.Log
+import com.example.movticket.Sign.User
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.database.*
 
 class SignUpPhoto : AppCompatActivity() {
 
@@ -35,6 +37,11 @@ class SignUpPhoto : AppCompatActivity() {
     lateinit var storageRefrence : StorageReference
     lateinit var preferences: Prefences
 
+    var mDatabaseReference = FirebaseDatabase.getInstance().getReference("User")
+    lateinit var uname : String
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_photo)
@@ -43,7 +50,9 @@ class SignUpPhoto : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         storageRefrence = storage.getReference()
 
-        tv_welcome.text = "Selamat Datang\n"+intent.getStringArrayExtra("nama") //ambil data dari intent sebelumnya
+        uname = intent.getStringExtra("uname")
+
+        tv_welcome.text = "Selamat Datang\n"+intent.getStringExtra("nama") //ambil data dari intent sebelumnya
 
         btn_add.setOnClickListener{
 
@@ -55,15 +64,13 @@ class SignUpPhoto : AppCompatActivity() {
                 img_profil.setImageResource(R.drawable.user_pict)
             } else{
                 //belum ada gambar dan tombol add di click
-                /*Dexter.withActivity(this)
-                    .withPermission(android.Manifest.permission.CAMERA)
-                    .withListener(this)
-                    .check()
-                 */
 
+                Log.v("checkpoint : ","1")
                 ImagePicker.with(this)
-                    .cameraOnly()
+                    .galleryOnly()
                     .start()
+
+                Log.v("checkpoint : ","2")
             }
         }
 
@@ -80,19 +87,29 @@ class SignUpPhoto : AppCompatActivity() {
                 progressDialog.setTitle("Uploading...")
                 progressDialog.show()
 
+
                 //firebase
                 var ref  = storageRefrence.child("Images/"+UUID.randomUUID().toString()) //biar gak bentrok?
+
                 ref.putFile(filepath) //upload file gambar yang ada di filepath
                     .addOnSuccessListener { //action yang bakal dilakukan kalau upload sukses
                         progressDialog.dismiss() //menghilangkan progresssbar
                         Toast.makeText(this, "Uploaded", Toast.LENGTH_LONG).show() //memberi tahu bahwa upload sukses
+
 
                         //gak ngerti ngapain kode dibawah ini
                         ref.downloadUrl.addOnSuccessListener {
                             preferences.setValue("url", it.toString())
                         }
 
+                        /*
+                        Log.d("test","berhasil upoad di hp")
+                        //nambah gambar ke firebase
+                        //uploadgambar(uname,filepath)
+                        Log.d("test","berhasil upoad di database")*/
+
                         //pindah ke home
+                        preferences.setValue("status", "1")
                         finishAffinity()
                         startActivity(Intent(this@SignUpPhoto, HomeActivity::class.java))
                     }
@@ -110,6 +127,27 @@ class SignUpPhoto : AppCompatActivity() {
             }
         }
     }
+
+    /*private fun uploadgambar(username: String, path:Uri) {
+
+        mDatabaseReference.child(username).addValueEventListener(
+
+            object : ValueEventListener {
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(this@SignUpPhoto, ""+databaseError.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var user = dataSnapshot.getValue(User::class.java)
+
+                    //belum pernah dibuat
+                    mDatabaseReference.child(username).child("url").setValue(path) //upload data ke firebase
+
+                }
+            }
+        )
+    }*/
 
      fun onPermissionGranted(response: PermissionGrantedResponse?) {
         //kalau disetujuin (apa yang disetujuin ?)
@@ -139,11 +177,12 @@ class SignUpPhoto : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == Activity.RESULT_OK){
-            statusAdd =  true
+        if (resultCode == Activity.RESULT_OK){
 
+            statusAdd =  true
             filepath = data?.data!!
-            //memnculkan foto yang dipilih
+
+             //memnculkan foto yang dipilih
             Glide.with(this)
                 .load(filepath)
                 .apply(RequestOptions.circleCropTransform()) //membuat gambar menjadi lingkaran
@@ -153,10 +192,12 @@ class SignUpPhoto : AppCompatActivity() {
 
             btn_upload.visibility = View.VISIBLE //menampilkan tombol "Simpan dan lanjutkan"
             btn_add.setImageResource(R.drawable.ic_delete)
+
         } else if (resultCode == ImagePicker.RESULT_ERROR){
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG)
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
         } else{
-            Toast.makeText(this, "task cancelled", Toast.LENGTH_LONG)
+            Toast.makeText(this, "req code : $requestCode \nresultocde = $resultCode", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "task cancelled", Toast.LENGTH_LONG).show()
         }
 
     }
