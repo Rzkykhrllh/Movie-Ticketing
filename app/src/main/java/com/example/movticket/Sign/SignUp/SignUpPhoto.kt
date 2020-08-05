@@ -36,8 +36,9 @@ class SignUpPhoto : AppCompatActivity() {
     lateinit var storage : FirebaseStorage
     lateinit var storageRefrence : StorageReference
     lateinit var preferences: Prefences
+    var user =  User()
 
-    var mDatabaseReference = FirebaseDatabase.getInstance().getReference("User")
+    var mDatabaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("User")
     lateinit var uname : String
 
 
@@ -50,9 +51,10 @@ class SignUpPhoto : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         storageRefrence = storage.getReference()
 
-        uname = intent.getStringExtra("uname")
 
         tv_welcome.text = "Selamat Datang\n"+intent.getStringExtra("nama") //ambil data dari intent sebelumnya
+
+        getData()
 
         btn_add.setOnClickListener{
 
@@ -75,6 +77,11 @@ class SignUpPhoto : AppCompatActivity() {
         }
 
         btn_upload_nanti.setOnClickListener {
+
+            setPreferences()
+            user.url = ""
+            mDatabaseReference.child(user.username!!).setValue(user)
+
             finishAffinity()
             startActivity(Intent(this@SignUpPhoto, HomeActivity::class.java))
         }
@@ -100,6 +107,7 @@ class SignUpPhoto : AppCompatActivity() {
                         //gak ngerti ngapain kode dibawah ini
                         ref.downloadUrl.addOnSuccessListener {
                             preferences.setValue("url", it.toString())
+                            user.url = it.toString()
                         }
 
                         /*
@@ -110,6 +118,10 @@ class SignUpPhoto : AppCompatActivity() {
 
                         //pindah ke home
                         preferences.setValue("status", "1")
+
+                        setPreferences()
+                        mDatabaseReference.child(user.username!!).setValue(user)
+
                         finishAffinity()
                         startActivity(Intent(this@SignUpPhoto, HomeActivity::class.java))
                     }
@@ -128,26 +140,24 @@ class SignUpPhoto : AppCompatActivity() {
         }
     }
 
-    /*private fun uploadgambar(username: String, path:Uri) {
+    private fun getData() {
+        user.nama = intent.getStringExtra("nama")
+        user.username = intent.getStringExtra("uname")
+        user.email = intent.getStringExtra("email")
+        user.saldo = intent.getStringExtra("saldo")
+        user.password = intent.getStringExtra("pass")
 
-        mDatabaseReference.child(username).addValueEventListener(
+    }
 
-            object : ValueEventListener {
+    private fun setPreferences() {
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(this@SignUpPhoto, ""+databaseError.message, Toast.LENGTH_LONG).show()
-                }
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    var user = dataSnapshot.getValue(User::class.java)
-
-                    //belum pernah dibuat
-                    mDatabaseReference.child(username).child("url").setValue(path) //upload data ke firebase
-
-                }
-            }
-        )
-    }*/
+        preferences.setValue("nama", user.nama.toString())
+        preferences.setValue("username", user.username.toString())
+        preferences.setValue("email", user.email.toString())
+        preferences.setValue("saldo", user.saldo.toString())
+        preferences.setValue("status", "1")
+    }
 
      fun onPermissionGranted(response: PermissionGrantedResponse?) {
         //kalau disetujuin (apa yang disetujuin ?)

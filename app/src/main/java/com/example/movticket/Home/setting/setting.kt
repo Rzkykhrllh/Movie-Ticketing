@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 
 class setting : Fragment() {
 
-    lateinit var preferences : Prefences
+    lateinit var preferences: Prefences
 
 
     override fun onCreateView(
@@ -33,10 +33,10 @@ class setting : Fragment() {
         tv_nama.text = preferences.getValue("nama")
         tv_email.text = preferences.getValue("email")
 
-            /*Glide.with(this)
-                .load(preferences.getValue("url"))
-                .apply(RequestOptions.circleCropTransform())
-                .into(img_profile)*/
+        Glide.with(this)
+            .load(preferences.getValue("url"))
+            .apply(RequestOptions.circleCropTransform())
+            .into(img_profile)
 
 
     }
