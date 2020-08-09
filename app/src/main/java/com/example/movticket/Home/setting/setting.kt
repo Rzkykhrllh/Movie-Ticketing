@@ -1,5 +1,6 @@
 package com.example.movticket.Home.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
+import com.example.movticket.wallet.MyWalletActivity
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 class setting : Fragment() {
@@ -39,6 +41,9 @@ class setting : Fragment() {
             .into(img_profile)
 
 
+        tv_my_wallet.setOnClickListener{
+            startActivity(Intent(activity, MyWalletActivity::class.java))
+        }
     }
 
 

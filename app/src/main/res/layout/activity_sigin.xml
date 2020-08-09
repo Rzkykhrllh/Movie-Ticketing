@@ -12,7 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="184dp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="58dp"
         android:src="@drawable/logo_mov"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +25,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Sign In"
         android:textColor="@color/putih"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -41,9 +41,11 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/shape_rectangle_blue_grey"
+        android:fontFamily="@font/montserrat_semibold"
         android:text="@string/buatakunbaru"
         android:textColor="@color/putih"
         android:textColorLink="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -57,8 +59,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/shape_rectangle_pink"
+        android:fontFamily="@font/montserrat_semibold"
         android:text="@string/masuk"
         android:textColor="@color/putih"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_buatakun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -70,6 +74,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/username"
         android:textColor="@color/putih"
         android:textSize="16sp"
@@ -86,7 +91,7 @@
         android:layout_marginEnd="24dp"
         android:backgroundTint="@color/putih"
         android:ems="10"
-        tools:text="Rizky Khairullah"
+        android:fontFamily="@font/montserrat_medium"
         android:inputType="textPersonName"
         android:textColor="@color/putih"
         android:textColorHint="@color/putihabu"
@@ -94,7 +99,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:text="Rizky Khairullah" />
 
     <TextView
         android:id="@+id/textView4"
@@ -103,11 +109,13 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
-        tools:text="@string/password"
+        android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/putih"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_usrnm" />
+        app:layout_constraintTop_toBottomOf="@+id/et_usrnm"
+        tools:text="@string/password" />
 
     <EditText
         android:id="@+id/et_pass"
@@ -118,10 +126,12 @@
         android:layout_marginEnd="24dp"
         android:backgroundTint="@color/putih"
         android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
         android:hint="**********"
         android:inputType="textPassword"
         android:textColor="@color/putih"
         android:textColorHint="@color/putihabu"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

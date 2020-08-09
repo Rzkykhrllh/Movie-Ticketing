@@ -27,7 +27,7 @@
         <activity android:name=".Home.Tiket.TiketActivity"></activity>
         <activity android:name=".onboarding.OnBoardingThreeActivity" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".MyWalletActivity" />
+        <activity android:name=".wallet.MyWalletActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".Buying.CheckoutActivity" />
         <activity android:name=".Buying.PilihBangkuActivity" />
