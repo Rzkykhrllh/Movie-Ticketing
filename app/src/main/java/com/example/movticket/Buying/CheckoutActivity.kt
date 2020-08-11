@@ -1,5 +1,6 @@
 package com.example.movticket.Buying
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,8 +31,20 @@ class CheckoutActivity : AppCompatActivity() {
         rv_bangku.layoutManager = LinearLayoutManager(this)
         rv_bangku.adapter = CheckoutAdapter(dataList){
         }
+
         btn_back.setOnClickListener{
             finish()
         }
+
+        btn_bayar.setOnClickListener {
+            finishAffinity()
+            startActivity(Intent(this, SuccessBuyingActivity::class.java))
+        }
+
+        btn_batal.setOnClickListener {
+            finish()
+        }
+
+
     }
 }

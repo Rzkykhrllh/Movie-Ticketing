@@ -24,7 +24,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home.Tiket.TiketActivity"></activity>
+        <activity android:name=".wallet.SuccessTopupActivity"></activity>
+        <activity android:name=".wallet.TestActivity" />
+        <activity android:name=".onboarding.testing" />
+        <activity android:name=".Buying.SuccessBuyingActivity" />
+        <activity android:name=".wallet.TopupActivity" />
+        <activity android:name=".Home.Tiket.TiketActivity" />
         <activity android:name=".onboarding.OnBoardingThreeActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".wallet.MyWalletActivity" />

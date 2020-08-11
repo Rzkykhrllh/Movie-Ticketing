@@ -1,5 +1,6 @@
 package com.example.movticket.wallet
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +55,10 @@ class MyWalletActivity : AppCompatActivity() {
         rv_transaksi.layoutManager = LinearLayoutManager(this)
         rv_transaksi.adapter = WalletAdapter(dataList){
 
+        }
+
+        btn_topup.setOnClickListener {
+            startActivity(Intent(this, TopupActivity::class.java))
         }
 
     }

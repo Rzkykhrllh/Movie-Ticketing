@@ -15,6 +15,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_empty"
         android:orientation="vertical"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
-            android:text="@string/title_camera"
+            android:fontFamily="@font/montserrat_regular"
+
+            android:text="Kimi no Nawa"
             android:textColor="@color/putih"/>
 
         <TextView
@@ -50,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
+            android:text="Action"
+            android:fontFamily="@font/montserrat_light"
             android:textColor="@color/putih"
             app:layout_constraintBottom_toBottomOf="@id/cardView"/>
 
@@ -67,7 +71,10 @@
         android:drawableLeft="@drawable/ic_star"
         android:gravity="center"
         android:text="rate"
+        android:textSize="11sp"
+        android:fontFamily="@font/montserrat_light"
         android:textColor="@color/putih"
+        android:drawablePadding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardView"
         app:layout_constraintBottom_toBottomOf="@id/cardView"/>

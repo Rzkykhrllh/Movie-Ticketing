@@ -27,6 +27,7 @@
         android:drawablePadding="20dp"
         android:textColor="@color/putih"
         android:textSize="18sp"
+        android:fontFamily="@font/montserrat_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_poster" />
 
@@ -48,7 +49,8 @@
         android:layout_marginTop="4dp"
         android:text="Drama, Romance"
         android:textColor="@color/putih"
-        android:textSize="12sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_judul" />
 
@@ -57,13 +59,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="4dp"
+        android:drawableLeft="@drawable/ic_star"
+        android:drawablePadding="3dp"
+        android:fontFamily="@font/montserrat_light"
         android:text="9.2"
         android:textColor="@color/putih"
         android:textSize="12sp"
-        android:drawableLeft="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_genre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_judul" />
+        app:layout_constraintTop_toTopOf="@+id/tv_judul" />
 
     <TextView
         android:id="@+id/textView15"
@@ -71,6 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Story Board"
         android:textColor="@color/putih"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +91,7 @@
         android:layout_marginEnd="24dp"
         android:text="After the aftermath of a war, a young girl who  was used as a 'tool' for war learned to live. With the scars of burns , she goes back to her  past to feel the true feelings of the Major's , &quot;I love you.&quot; "
         android:textColor="@color/putih"
+        android:fontFamily="@font/montserrat_light"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +113,10 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
+        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
+        tools:listitem="@layout/row_item_plays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -121,6 +130,8 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/shape_rectangle_pink"
         android:text="@string/pilih_bangku"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/putih"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
