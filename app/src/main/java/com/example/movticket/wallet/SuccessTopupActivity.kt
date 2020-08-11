@@ -10,10 +10,5 @@ class SuccessTopupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_success_topup)
-
-        btn_topup.setOnClickListener {
-            finishAffinity()
-            startActivity(Intent(this, SuccessTopupActivity::class.java))
-        }
     }
 }

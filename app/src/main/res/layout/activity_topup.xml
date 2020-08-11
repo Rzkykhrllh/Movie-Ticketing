@@ -112,6 +112,7 @@
         android:backgroundTint="@color/putih"
         android:ems="10"
         android:inputType="numberSigned"
+        android:textColor="@color/putih"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
