@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movticket.Home.HomeActivity
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
 import com.example.movticket.wallet.adapter.WalletAdapter
@@ -25,20 +26,8 @@ class MyWalletActivity : AppCompatActivity() {
         mDatabase = FirebaseDatabase.getInstance().getReference()
 
         preference = Prefences(this!!)
-        tv_saldo.text = preference.getValue("saldo")
+        tv_saldo.text = preference.getValue("saldo").toString()
         username  = preference.getValue("username")!!
-
-        /*
-        UPDATE NILAI DARI SALDO SUKSES, BISA DI IMPLEMENT DI SETELAH POP UP
-        var map = mutableMapOf<String, Int>()
-        map["saldo"] = 999
-        FirebaseDatabase.getInstance().reference
-            .child("User")
-            .child(username)
-            .updateChildren(map as Map<String, Any>)
-            */
-
-        readSingle()
 
         dataList.add(
             wallet(
@@ -85,9 +74,13 @@ class MyWalletActivity : AppCompatActivity() {
             startActivity(Intent(this, TopupActivity::class.java))
         }
 
+        btn_back.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
     }
 
-    private fun readSingle() {
+    /*private fun readSingle() {
         FirebaseDatabase.getInstance().reference
             .child("User")
             .child(username)
@@ -106,5 +99,5 @@ class MyWalletActivity : AppCompatActivity() {
                 }
             )
 
-    }
+    }*/
 }

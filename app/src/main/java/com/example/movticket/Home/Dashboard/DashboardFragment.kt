@@ -40,9 +40,7 @@ class DashboardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         preferences = Prefences(activity!!.applicationContext)
-
         mDatabase = FirebaseDatabase.getInstance().getReference("Film")
-
         tv_nama.setText(preferences.getValue("nama")) //ambil data nama dari preference
 
 

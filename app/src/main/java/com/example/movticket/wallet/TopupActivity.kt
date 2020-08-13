@@ -3,6 +3,7 @@ package com.example.movticket.wallet
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movticket.Home.HomeActivity
@@ -26,8 +27,8 @@ class TopupActivity : AppCompatActivity() {
     var top100k = false
     var top200k = false
 
-    var saldo_sekarang : Int = 0
-    lateinit var preference : Prefences
+    var saldo_sekarang: Int = 0
+    lateinit var preference: Prefences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +37,12 @@ class TopupActivity : AppCompatActivity() {
 
         preference = Prefences(this!!)
         var username = preference.getValue("username")!!
+        saldo_sekarang = preference.getValue("saldo").toString().toInt()
+        tv_saldo.text = saldo_sekarang.toString()
 
-        readSingle(username)
+        //readSingle(username)
         Log.d("saldo luar", "$saldo_sekarang")
-        //tv_saldo.text = saldo_sekarang.toString()
+
 
         btn_topup.setOnClickListener {
             updatesaldo(username)
@@ -48,56 +51,60 @@ class TopupActivity : AppCompatActivity() {
         }
 
         btn_10k.setOnClickListener {
-            if (top10k){
+            if (top10k) {
                 deselect(btn_10k, 10)
-            } else{
-                select(btn_10k,10)
+            } else {
+                select(btn_10k, 10)
             }
         }
         btn_20k.setOnClickListener {
-            if (top20k){
+            if (top20k) {
                 deselect(btn_20k, 20)
-            } else{
-                select(btn_20k,20)
+            } else {
+                select(btn_20k, 20)
             }
         }
         btn_25k.setOnClickListener {
-            if (top25k){
+            if (top25k) {
                 deselect(btn_25k, 25)
-            } else{
-                select(btn_25k,25)
+            } else {
+                select(btn_25k, 25)
             }
         }
         btn_50k.setOnClickListener {
-            if (top50k){
+            if (top50k) {
                 deselect(btn_50k, 50)
-            } else{
-                select(btn_50k,50)
+            } else {
+                select(btn_50k, 50)
             }
         }
         btn_100k.setOnClickListener {
-            if (top100k){
+            if (top100k) {
                 deselect(btn_100k, 100)
-            } else{
-                select(btn_100k,100)
+            } else {
+                select(btn_100k, 100)
             }
         }
         btn_200k.setOnClickListener {
-            if (top200k){
+            if (top200k) {
                 deselect(btn_200k, 200)
-            } else{
-                select(btn_200k,200)
+            } else {
+                select(btn_200k, 200)
             }
+        }
+
+        btn_backk.setOnClickListener {
+            finish()
         }
 
 
     }
 
-    private fun select(now : TextView, nominal : Int) {
-            now.setTextColor(resources.getColor(R.color.pink))
-            now.setBackgroundResource(R.drawable.shape_rectangle_line_pink)
+    private fun select(now: TextView, nominal: Int) {
+        now.setTextColor(resources.getColor(R.color.pink))
+        now.setBackgroundResource(R.drawable.shape_rectangle_line_pink)
 
-        when(nominal){
+        when (nominal) {
             10 -> top10k = true
             20 -> top20k = true
             25 -> top25k = true
@@ -106,13 +113,23 @@ class TopupActivity : AppCompatActivity() {
             200 -> top200k = true
             else -> ""
         }
+        activeate_tombol()
+
     }
 
-    private fun deselect(now : TextView, nominal : Int) {
-            now.setTextColor(resources.getColor(R.color.putih))
-            now.setBackgroundResource(R.drawable.shape_rectangle_line_putih)
+    private fun activeate_tombol() {
+        if (top10k || top20k || top25k || top50k || top100k || top100k) {
+            btn_topup.visibility = View.VISIBLE
+        } else {
+            btn_topup.visibility = View.INVISIBLE
+        }
+    }
 
-        when(nominal){
+    private fun deselect(now: TextView, nominal: Int) {
+        now.setTextColor(resources.getColor(R.color.putih))
+        now.setBackgroundResource(R.drawable.shape_rectangle_line_putih)
+
+        when (nominal) {
             10 -> top10k = false
             20 -> top20k = false
             25 -> top25k = false
@@ -121,17 +138,18 @@ class TopupActivity : AppCompatActivity() {
             200 -> top200k = false
             else -> ""
         }
+        activeate_tombol()
     }
 
-    private fun updatesaldo(username : String) {
+    private fun updatesaldo(username: String) {
         var total = 0
 
-        if (top10k) total+=10000
-        if (top20k) total+=20000
-        if (top25k) total+=25000
-        if (top50k) total+=50000
-        if (top100k) total+=100000
-        if (top200k) total+=200000
+        if (top10k) total += 10000
+        if (top20k) total += 20000
+        if (top25k) total += 25000
+        if (top50k) total += 50000
+        if (top100k) total += 100000
+        if (top200k) total += 200000
 
 
         var map = mutableMapOf<String, Int>()
@@ -141,31 +159,8 @@ class TopupActivity : AppCompatActivity() {
             .child(username)
             .updateChildren(map as Map<String, Any>)
 
-    }
 
-    private fun readSingle(username : String) {
-
-        FirebaseDatabase.getInstance().reference
-            .child("User")
-            .child(username)
-            .addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot) {
-                        var map = p0.value as Map<String,Int>
-                        saldo_sekarang = map["saldo"]!!.toInt()
-
-                        Log.d("saldo dalam", "$saldo_sekarang")
-                        tv_saldo.text = saldo_sekarang.toString()
-
-
-                    }
-
-                }
-            )
+        preference.setValue("saldo", (saldo_sekarang + total).toString())
 
     }
 
