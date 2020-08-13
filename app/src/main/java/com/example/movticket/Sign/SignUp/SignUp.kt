@@ -94,7 +94,7 @@ class SignUp : AppCompatActivity() {
                     //Apabila username sudah digunakan  oleh pengguna lain
                     if (user == null){
                         //belum pernah dibuat
-                        //mDatabaseReference.child(username).setValue(data) //upload data ke firebase
+                        mDatabaseReference.child(username).setValue(data) //upload data ke firebase
 
 
                         startActivity(Intent(this@SignUp, SignUpPhoto::class.java)
@@ -103,6 +103,7 @@ class SignUp : AppCompatActivity() {
                             .putExtra("email", data.email)
                             .putExtra("pass", data.password)
                             .putExtra("saldo", data.saldo)
+
                         )
                     } else{
                         //User pernah dibuat

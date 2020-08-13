@@ -5,16 +5,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movticket.R
+import com.example.movticket.utils.Prefences
 import com.example.movticket.wallet.adapter.WalletAdapter
 import com.example.movticket.wallet.model.wallet
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_wallet.*
 
 class MyWalletActivity : AppCompatActivity() {
 
+    lateinit var preference : Prefences
     private var dataList = arrayListOf<wallet>()
+    private lateinit var mDatabase : DatabaseReference
+    private lateinit var username : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_wallet)
+
+        mDatabase = FirebaseDatabase.getInstance().getReference()
+
+        preference = Prefences(this!!)
+        tv_saldo.text = preference.getValue("saldo")
+        username  = preference.getValue("username")!!
+
+        /*
+        UPDATE NILAI DARI SALDO SUKSES, BISA DI IMPLEMENT DI SETELAH POP UP
+        var map = mutableMapOf<String, Int>()
+        map["saldo"] = 999
+        FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .updateChildren(map as Map<String, Any>)
+            */
+
+        readSingle()
 
         dataList.add(
             wallet(
@@ -60,6 +84,27 @@ class MyWalletActivity : AppCompatActivity() {
         btn_topup.setOnClickListener {
             startActivity(Intent(this, TopupActivity::class.java))
         }
+
+    }
+
+    private fun readSingle() {
+        FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var map = p0.value as Map<String,Int>
+                        tv_saldo.text = map["saldo"].toString()
+
+                    }
+
+                }
+            )
 
     }
 }
