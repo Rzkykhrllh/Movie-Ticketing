@@ -29,46 +29,9 @@ class MyWalletActivity : AppCompatActivity() {
         tv_saldo.text = preference.getValue("saldo").toString()
         username  = preference.getValue("username")!!
 
-        dataList.add(
-            wallet(
-                "Spider man : Far From Home",
-                "Kamis, 12 Januari 2020",
-                35000.0,
-                "0"
-            )
-        )
-
-        dataList.add(
-            wallet(
-                "Top Up",
-                "Kamis, 19 Januari 2020",
-                200000.0,
-                "1"
-            )
-        )
-
-        dataList.add(
-            wallet(
-                "Nanti Kita Cerita Tentang Hari Ini",
-                "Kamis, 19 Januari 2020",
-                105000.0,
-                "0"
-            )
-        )
-
-        dataList.add(
-            wallet(
-                "Violet Evegarden The Movie",
-                "Kamis, 21 Juli 2020",
-                70000.0,
-                "0"
-            )
-        )
-
         rv_transaksi.layoutManager = LinearLayoutManager(this)
-        rv_transaksi.adapter = WalletAdapter(dataList){
+        getTransactionData() //take transaction data from database
 
-        }
 
         btn_topup.setOnClickListener {
             startActivity(Intent(this, TopupActivity::class.java))
@@ -77,6 +40,36 @@ class MyWalletActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
         }
+
+    }
+
+    private fun getTransactionData() {
+        var mDatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .child("Transaksi")
+        
+        mDatabaseReference.addListenerForSingleValueEvent(
+            object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    dataList.clear()
+                    
+                    for (data in p0.children){
+                        var transaksi = data.getValue(wallet::class.java)
+                        dataList.add(transaksi!!)
+                    }
+
+
+                    rv_transaksi.adapter = WalletAdapter(dataList){
+                    }
+                }
+
+            }
+        )
 
     }
 

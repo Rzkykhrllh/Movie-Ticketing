@@ -69,6 +69,7 @@ class SignUp : AppCompatActivity() {
         user.password = pass
         user.nama = nama
         user.email = email
+        user.transactionCount = 0
 
         // apabila username diisi oleh user (tidak null)
         if (username != null){
@@ -95,7 +96,6 @@ class SignUp : AppCompatActivity() {
                     if (user == null){
                         //belum pernah dibuat
                         mDatabaseReference.child(username).setValue(data) //upload data ke firebase
-
 
                         startActivity(Intent(this@SignUp, SignUpPhoto::class.java)
                             .putExtra("nama", data.nama)

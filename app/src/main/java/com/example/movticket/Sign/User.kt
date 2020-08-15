@@ -7,5 +7,6 @@ class User {
     var url: String? = ""
     var username: String? = ""
     var saldo: String? = "0"
+    var transactionCount = 0
 
 }

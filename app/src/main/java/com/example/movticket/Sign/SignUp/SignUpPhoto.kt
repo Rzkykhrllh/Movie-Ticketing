@@ -110,14 +110,9 @@ class SignUpPhoto : AppCompatActivity() {
                             user.url = it.toString()
                         }
 
-                        /*
-                        Log.d("test","berhasil upoad di hp")
-                        //nambah gambar ke firebase
-                        //uploadgambar(uname,filepath)
-                        Log.d("test","berhasil upoad di database")*/
-
                         //pindah ke home
                         preferences.setValue("status", "1")
+                        preferences.setValue("transactionCount","0")
 
                         setPreferences()
                         mDatabaseReference.child(user.username!!).setValue(user)
@@ -192,7 +187,7 @@ class SignUpPhoto : AppCompatActivity() {
             statusAdd =  true
             filepath = data?.data!!
 
-             //memnculkan foto yang dipilih
+            //memnculkan foto yang dipilih
             Glide.with(this)
                 .load(filepath)
                 .apply(RequestOptions.circleCropTransform()) //membuat gambar menjadi lingkaran
