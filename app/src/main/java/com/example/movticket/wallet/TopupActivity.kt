@@ -1,10 +1,12 @@
 package com.example.movticket.wallet
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movticket.Home.HomeActivity
 import com.example.movticket.R
@@ -46,8 +48,6 @@ class TopupActivity : AppCompatActivity() {
 
         btn_topup.setOnClickListener {
             updatesaldo(username)
-            finishAffinity()
-            startActivity(Intent(this, SuccessTopupActivity::class.java))
         }
 
         btn_10k.setOnClickListener {
@@ -152,15 +152,42 @@ class TopupActivity : AppCompatActivity() {
         if (top200k) total += 200000
 
 
-        var map = mutableMapOf<String, Int>()
-        map["saldo"] = saldo_sekarang + total
-        FirebaseDatabase.getInstance().reference
-            .child("User")
-            .child(username)
-            .updateChildren(map as Map<String, Any>)
+        //build alert dialog
+        val dialogBuilder = AlertDialog.Builder(this)
 
+        //set message
+        dialogBuilder.setMessage("Apakah anda yakin ingin Top Up sebesar $total ?")
 
-        preference.setValue("saldo", (saldo_sekarang + total).toString())
+        //menidakan tombol netral
+        dialogBuilder.setCancelable(false)
+
+        //tombol positive
+        dialogBuilder.setPositiveButton("Ya", DialogInterface.OnClickListener{ dialog, id ->
+                var map = mutableMapOf<String, Int>()
+                map["saldo"] = saldo_sekarang + total
+                FirebaseDatabase.getInstance().reference
+                    .child("User")
+                    .child(username)
+                    .updateChildren(map as Map<String, Any>)
+                preference.setValue("saldo", (saldo_sekarang + total).toString())
+
+                finishAffinity()
+                startActivity(Intent(this, SuccessTopupActivity::class.java))
+            })
+
+        //tombol negative
+        dialogBuilder.setNegativeButton("Batal", DialogInterface.OnClickListener{
+                dialog, id -> dialog.cancel()
+            })
+
+        //membuat dialog
+        val alert = dialogBuilder.create()
+
+        //set judul
+        alert.setTitle("Konfirmasi")
+
+        //menampilkan
+        alert.show()
 
     }
 
