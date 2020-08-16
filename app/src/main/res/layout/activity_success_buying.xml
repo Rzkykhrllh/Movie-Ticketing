@@ -70,6 +70,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:visibility="invisible"
         android:id="@+id/btn_lihat_wallet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

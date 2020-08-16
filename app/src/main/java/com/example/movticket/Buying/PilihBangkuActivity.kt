@@ -31,6 +31,8 @@ class PilihBangkuActivity : AppCompatActivity() {
     var statusD4 = false
     var total = 0
 
+    var judul = ""
+
     private var datalist = ArrayList<Checkout>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class PilihBangkuActivity : AppCompatActivity() {
 
         val data : Film = intent.getParcelableExtra<Film>("data")
         tv_judul.text = data.judul.toString()
+        judul =  data.judul.toString()
 
         A1.setOnClickListener {
             Log.v("A1", "A1 dipencet")
@@ -164,7 +167,9 @@ class PilihBangkuActivity : AppCompatActivity() {
         btn_pilih.setOnClickListener {
             //datalist = datalist.sortedWith(compareBy({ it.kursi }))
 
-            startActivity(Intent(this, CheckoutActivity::class.java).putExtra("data",datalist))
+            startActivity(Intent(this, CheckoutActivity::class.java)
+                .putExtra("data",datalist)
+                .putExtra("judul", judul))
         }
 
         btn_back.setOnClickListener{

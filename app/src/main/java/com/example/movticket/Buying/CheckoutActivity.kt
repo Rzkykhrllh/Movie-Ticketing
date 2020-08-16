@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movticket.Model.Checkout
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
+import com.example.movticket.wallet.model.wallet
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_checkout.*
 
 class CheckoutActivity : AppCompatActivity() {
@@ -16,6 +20,8 @@ class CheckoutActivity : AppCompatActivity() {
     var total=0
     var saldo = 0
     var username = ""
+    var transactionCount = 0
+    var judul = ""
     lateinit var preferences : Prefences
 
     var dataList = ArrayList<Checkout>()
@@ -27,7 +33,9 @@ class CheckoutActivity : AppCompatActivity() {
         preferences = Prefences(this)
         saldo = preferences.getValue("saldo").toString().toInt()
         username = preferences.getValue("username").toString()
+        transactionCount = preferences.getValue("transactionCount")!!.toInt()
 
+        judul = intent.getStringExtra("judul")
         dataList = intent.getSerializableExtra("data") as ArrayList<Checkout>
 
         for (i in dataList.indices){
@@ -46,10 +54,14 @@ class CheckoutActivity : AppCompatActivity() {
 
         btn_bayar.setOnClickListener {
             updatesaldo()
+
+            finishAffinity()
+            startActivity(Intent(this, SuccessBuyingActivity::class.java))
         }
 
         btn_batal.setOnClickListener {
             finish()
+
         }
 
 
@@ -70,12 +82,40 @@ class CheckoutActivity : AppCompatActivity() {
                 .child(username)
                 .updateChildren(map as Map<String, Any>)
 
+            pushQueue(total)
 
-            finishAffinity()
-            startActivity(Intent(this, SuccessBuyingActivity::class.java))
         } else{
             Toast.makeText(this, "Saldo anda tidak mencukupi", Toast.LENGTH_LONG )
                 .show()
         }
+    }
+
+    private fun pushQueue(total: Int) {
+
+        var mDatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .child("Transaksi")
+            .child("$transactionCount")
+
+        mDatabaseReference.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    //Toast.makeText(this, ""+p0.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    mDatabaseReference.setValue(
+                        wallet(
+                            "$judul",
+                            "Jumat, 20 Januari 2020",
+                            money = total.toDouble(),
+                            status = "0"
+                        )
+                    )
+                }
+
+            }
+        )
     }
 }

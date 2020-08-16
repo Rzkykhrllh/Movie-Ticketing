@@ -38,6 +38,7 @@ class MyWalletActivity : AppCompatActivity() {
         }
 
         btn_back.setOnClickListener {
+            finishAffinity()
             startActivity(Intent(this, HomeActivity::class.java))
         }
 
