@@ -70,6 +70,7 @@ class SignUp : AppCompatActivity() {
         user.nama = nama
         user.email = email
         user.transactionCount = 0
+        user.ticketCount = 0
 
         // apabila username diisi oleh user (tidak null)
         if (username != null){

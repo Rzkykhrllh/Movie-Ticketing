@@ -112,7 +112,6 @@ class SignUpPhoto : AppCompatActivity() {
 
                         //pindah ke home
                         preferences.setValue("status", "1")
-                        preferences.setValue("transactionCount","0")
 
                         setPreferences()
                         mDatabaseReference.child(user.username!!).setValue(user)
@@ -152,6 +151,8 @@ class SignUpPhoto : AppCompatActivity() {
         preferences.setValue("email", user.email.toString())
         preferences.setValue("saldo", user.saldo.toString())
         preferences.setValue("status", "1")
+        preferences.setValue("transactionCount","0")
+        preferences.setValue("ticketCount","0")
     }
 
      fun onPermissionGranted(response: PermissionGrantedResponse?) {

@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
         android:layout_marginStart="8dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat_light"
         android:drawableLeft="@drawable/ic_baseline_seat"
         android:drawablePadding="8dp"
         android:gravity="center"

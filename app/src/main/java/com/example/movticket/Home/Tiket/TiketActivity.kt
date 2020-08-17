@@ -53,13 +53,12 @@ class TiketActivity : AppCompatActivity() {
             var inflater : LayoutInflater = getLayoutInflater();
             var dialogView = inflater.inflate(R.layout.pop_up_view, null);
             dialog.setContentView(dialogView);
-            dialog.setCancelable(true);
+            dialog.setCancelable(false);
             dialog.setTitle("Form Biodata");
 
-            Log.d("Teteh", "anata wo doko desu ka?")
             pop_tutup?.setOnClickListener {
                 Log.d("Teteh", "Kimi wo doko desu ka?")
-                dialog.dismiss()
+                dialog.cancel()
             }
             dialog.show()
         }

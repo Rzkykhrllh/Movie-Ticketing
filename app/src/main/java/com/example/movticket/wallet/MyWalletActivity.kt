@@ -63,7 +63,7 @@ class MyWalletActivity : AppCompatActivity() {
                         var transaksi = data.getValue(wallet::class.java)
                         dataList.add(transaksi!!)
                     }
-
+                    dataList.reverse()
 
                     rv_transaksi.adapter = WalletAdapter(dataList){
                     }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movticket.Model.Checkout
+import com.example.movticket.Model.Film
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
 import com.example.movticket.wallet.model.wallet
@@ -21,7 +22,9 @@ class CheckoutActivity : AppCompatActivity() {
     var saldo = 0
     var username = ""
     var transactionCount = 0
+    var ticketCount = 0
     var judul = ""
+    lateinit var film : Film
     lateinit var preferences : Prefences
 
     var dataList = ArrayList<Checkout>()
@@ -34,8 +37,11 @@ class CheckoutActivity : AppCompatActivity() {
         saldo = preferences.getValue("saldo").toString().toInt()
         username = preferences.getValue("username").toString()
         transactionCount = preferences.getValue("transactionCount")!!.toInt()
+        ticketCount = preferences.getValue("ticketCount")!!.toInt()
 
-        judul = intent.getStringExtra("judul")
+        film = intent.getParcelableExtra("film")
+
+        judul = film.judul.toString()
         dataList = intent.getSerializableExtra("data") as ArrayList<Checkout>
 
         for (i in dataList.indices){
@@ -72,7 +78,9 @@ class CheckoutActivity : AppCompatActivity() {
             saldo-=total;
 
             // update shared preference
+            transactionCount += 1
             preferences.setValue("saldo",saldo.toString())
+            preferences.setValue("transactionCount",transactionCount.toString())
 
             //update firebase
             var map = mutableMapOf<String, Int>()
@@ -82,13 +90,15 @@ class CheckoutActivity : AppCompatActivity() {
                 .child(username)
                 .updateChildren(map as Map<String, Any>)
 
-            pushQueue(total)
+            pushQueue(total) //push transaksi ke firebase
+            pushFilm() //push tiket ke history
 
         } else{
             Toast.makeText(this, "Saldo anda tidak mencukupi", Toast.LENGTH_LONG )
                 .show()
         }
     }
+
 
     private fun pushQueue(total: Int) {
 
@@ -117,5 +127,29 @@ class CheckoutActivity : AppCompatActivity() {
 
             }
         )
+    }
+
+    private fun pushFilm() {
+        ticketCount++
+        var mDatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .child("Tiket")
+            .child("$ticketCount")
+
+        mDatabaseReference.addListenerForSingleValueEvent(
+            object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    mDatabaseReference.setValue(film)
+                    preferences.setValue("ticketCount",ticketCount.toString())
+                }
+
+            }
+        )
+
     }
 }

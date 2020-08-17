@@ -71,8 +71,6 @@ class DashboardFragment : Fragment() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-
-
                 dataList.clear()
                 for (getdatasnapshot in dataSnapshot.children){
                     var film =  getdatasnapshot.getValue(Film::class.java)

@@ -2,6 +2,7 @@ package com.example.movticket.Home.Tiket
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,9 +24,7 @@ class TiketFragment : Fragment() {
     private lateinit var preferences : Prefences //database sementara
     private lateinit var mDatabase: DatabaseReference
     private var dataList = ArrayList<Film>()
-
-
-
+    private var username = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +38,14 @@ class TiketFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         preferences = Prefences(context!!)
-        mDatabase = FirebaseDatabase.getInstance().getReference("Film")
+        val username = preferences.getValue("username")
+        Log.d("userame", "$username")
+
+        mDatabase = FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child("$username")
+            .child("Tiket")
+
 
         rv_tiket.layoutManager = LinearLayoutManager(context)
         getData()
@@ -47,6 +53,7 @@ class TiketFragment : Fragment() {
     }
 
     private fun getData() {
+
         mDatabase.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(context, ""+databaseError.message, Toast.LENGTH_LONG).show()
@@ -59,6 +66,7 @@ class TiketFragment : Fragment() {
                     val film = getdataSnapshot.getValue(Film::class.java)
                     dataList.add(film!!)
                 }
+                dataList.reverse()
 
                 rv_tiket.adapter = ComingSoonAdapter(dataList){
                     startActivity(Intent(context, TiketActivity::class.java).putExtra("data", it))
@@ -69,6 +77,4 @@ class TiketFragment : Fragment() {
 
         })
     }
-
-
 }

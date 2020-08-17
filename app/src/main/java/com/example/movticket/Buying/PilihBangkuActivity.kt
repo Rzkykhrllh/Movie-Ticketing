@@ -51,7 +51,6 @@ class PilihBangkuActivity : AppCompatActivity() {
                 active(A1, "A1")
             }
         }
-
         A2.setOnClickListener {
             if (statusA2){
                 deactive(A2, "A2")
@@ -59,7 +58,6 @@ class PilihBangkuActivity : AppCompatActivity() {
                 active(A2, "A2")
             }
         }
-
         A3.setOnClickListener {
             if (statusA3){
                 deactive(A3, "A3")
@@ -67,7 +65,6 @@ class PilihBangkuActivity : AppCompatActivity() {
                 active(A3, "A3")
             }
         }
-
         A4.setOnClickListener {
             if (statusA4){
                 deactive(A4, "A4")
@@ -75,7 +72,6 @@ class PilihBangkuActivity : AppCompatActivity() {
                 active(A4, "A4")
             }
         }
-
         B1.setOnClickListener {
             if (statusB1){
                 deactive(B1, "B1")
@@ -83,7 +79,6 @@ class PilihBangkuActivity : AppCompatActivity() {
                 active(B1, "B1")
             }
         }
-
         B2.setOnClickListener {
             if (statusB2){
                 deactive(B2, "B2")
@@ -169,7 +164,7 @@ class PilihBangkuActivity : AppCompatActivity() {
 
             startActivity(Intent(this, CheckoutActivity::class.java)
                 .putExtra("data",datalist)
-                .putExtra("judul", judul))
+                .putExtra("film",data))
         }
 
         btn_back.setOnClickListener{

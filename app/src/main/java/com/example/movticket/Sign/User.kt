@@ -8,5 +8,6 @@ class User {
     var username: String? = ""
     var saldo: String? = "0"
     var transactionCount = 0
+    var ticketCount = 0
 
 }
