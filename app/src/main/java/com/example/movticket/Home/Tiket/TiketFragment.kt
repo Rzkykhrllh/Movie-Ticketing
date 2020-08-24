@@ -9,21 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movticket.Home.Dashboard.ComingSoonAdapter
-import com.example.movticket.Model.Film
+import com.example.movticket.Home.Dashboard.TiketAdapter
+import com.example.movticket.Model.Tiket
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_checkout.*
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_tiket.*
 
 
 class TiketFragment : Fragment() {
 
-    private lateinit var preferences : Prefences //database sementara
+    private lateinit var preferences: Prefences //database sementara
     private lateinit var mDatabase: DatabaseReference
-    private var dataList = ArrayList<Film>()
+    private var dataList = ArrayList<Tiket>()
     private var username = ""
 
     override fun onCreateView(
@@ -47,32 +45,35 @@ class TiketFragment : Fragment() {
             .child("Tiket")
 
 
-        rv_tiket.layoutManager = LinearLayoutManager(context)
+        rv_tiket.layoutManager = LinearLayoutManager(context!!)
         getData()
 
     }
 
     private fun getData() {
 
-        mDatabase.addValueEventListener(object : ValueEventListener{
+        mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(context, ""+databaseError.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "" + databaseError.message, Toast.LENGTH_LONG).show()
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 dataList.clear()
-                for (getdataSnapshot in dataSnapshot.children){
-                    val film = getdataSnapshot.getValue(Film::class.java)
-                    dataList.add(film!!)
+                for (getdataSnapshot in dataSnapshot.children) {
+                    val tiket = getdataSnapshot.getValue(Tiket::class.java)
+                    dataList.add(tiket!!)
                 }
                 dataList.reverse()
 
-                rv_tiket.adapter = ComingSoonAdapter(dataList){
-                    startActivity(Intent(context, TiketActivity::class.java).putExtra("data", it))
+                rv_tiket.adapter = TiketAdapter(dataList!!) {
+                    startActivity(
+                        Intent(context, TiketActivity::class.java)
+                            .putExtra("data", it)
+                    )
                 }
 
-                tv_jumlah.text = "${dataList.size} Movies"
+                tv_jumlah.text = "${dataList?.size ?: -1} Movies"
             }
 
         })

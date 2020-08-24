@@ -3,10 +3,13 @@ package com.example.movticket.Buying
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.renderscript.Sampler
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movticket.Model.Checkout
 import com.example.movticket.Model.Film
+import com.example.movticket.Model.Tiket
 import com.example.movticket.R
 import com.example.movticket.utils.Prefences
 import com.example.movticket.wallet.model.wallet
@@ -59,7 +62,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
 
         btn_bayar.setOnClickListener {
-            updatesaldo()
+            updatesaldo() //proses pengurangan saldo disini
 
             finishAffinity()
             startActivity(Intent(this, SuccessBuyingActivity::class.java))
@@ -69,8 +72,6 @@ class CheckoutActivity : AppCompatActivity() {
             finish()
 
         }
-
-
     }
 
     private fun updatesaldo() {
@@ -78,20 +79,29 @@ class CheckoutActivity : AppCompatActivity() {
             saldo-=total;
 
             // update shared preference
-            transactionCount += 1
+            transactionCount++
+            ticketCount++
+
             preferences.setValue("saldo",saldo.toString())
             preferences.setValue("transactionCount",transactionCount.toString())
+            preferences.setValue("ticketCount",ticketCount.toString())
 
-            //update firebase
+
+            //update saldo di firebase
             var map = mutableMapOf<String, Int>()
             map["saldo"] = saldo
+            map["transactionCount"] = transactionCount
+            map["ticketCount"] = ticketCount
+
             FirebaseDatabase.getInstance().reference
                 .child("User")
                 .child(username)
                 .updateChildren(map as Map<String, Any>)
 
             pushQueue(total) //push transaksi ke firebase
-            pushFilm() //push tiket ke history
+            pushKursi() //push kursi ke history
+            pushTiket() //push tiket ke history
+
 
         } else{
             Toast.makeText(this, "Saldo anda tidak mencukupi", Toast.LENGTH_LONG )
@@ -129,13 +139,14 @@ class CheckoutActivity : AppCompatActivity() {
         )
     }
 
-    private fun pushFilm() {
-        ticketCount++
+    private fun pushTiket() {
         var mDatabaseReference = FirebaseDatabase.getInstance().reference
             .child("User")
             .child(username)
             .child("Tiket")
             .child("$ticketCount")
+
+        Log.d("Tiket", "1")
 
         mDatabaseReference.addListenerForSingleValueEvent(
             object : ValueEventListener{
@@ -144,12 +155,49 @@ class CheckoutActivity : AppCompatActivity() {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    mDatabaseReference.setValue(film)
-                    preferences.setValue("ticketCount",ticketCount.toString())
+
+                    Log.d("Tiket", "2")
+                    mDatabaseReference.setValue(
+                        Tiket(
+                            film.judul,
+                            film.rating,
+                            film.genre,
+                            film.poster,
+                            "$ticketCount"
+                        )
+                    )
+                    Log.d("Tiket", "3")
                 }
 
             }
         )
+    }
+    private fun pushKursi() {
+        var mDatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("User")
+            .child(username)
+            .child("Kursi")
+            .child("$ticketCount")
 
+        Log.d("kursi", "1")
+
+        mDatabaseReference.addListenerForSingleValueEvent(
+            object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+
+                    Log.d("kursi", "2")
+
+                    dataList.removeAt(dataList.size-1)
+                    mDatabaseReference.setValue(dataList)
+
+                    Log.d("kursi", "3")
+                }
+
+            }
+        )
     }
 }
