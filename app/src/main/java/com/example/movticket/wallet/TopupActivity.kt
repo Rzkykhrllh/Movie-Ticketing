@@ -3,8 +3,11 @@ package com.example.movticket.wallet
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.View.INVISIBLE
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,8 @@ class TopupActivity : AppCompatActivity() {
     var username = ""
     lateinit var preference: Prefences
 
+    lateinit var input : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topup)
@@ -46,6 +51,33 @@ class TopupActivity : AppCompatActivity() {
 
         //readSingle(username)
         Log.d("saldo luar", "$saldo_sekarang")
+
+        et_number.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    if (et_number.text.toString().isNotEmpty()){
+                        hideAll()
+                        btn_topup.visibility = View.VISIBLE
+                    } else{
+                       showAll()
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    //TODO("Not yet implemented")
+                }
+
+            }
+        )
 
         btn_topup.setOnClickListener {
             updatesaldo(username)
@@ -99,6 +131,42 @@ class TopupActivity : AppCompatActivity() {
         }
     }
 
+    private fun showAll(){
+        btn_10k.visibility = View.VISIBLE
+        btn_20k.visibility = View.VISIBLE
+        btn_25k.visibility = View.VISIBLE
+        btn_50k.visibility = View.VISIBLE
+        btn_100k.visibility = View.VISIBLE
+        btn_200k.visibility = View.VISIBLE
+    }
+
+    private fun hideAll() {
+        btn_10k.visibility = View.INVISIBLE
+        btn_20k.visibility = View.INVISIBLE
+        btn_25k.visibility = View.INVISIBLE
+        btn_50k.visibility = View.INVISIBLE
+        btn_100k.visibility = View.INVISIBLE
+        btn_200k.visibility = View.INVISIBLE
+
+        deselect(btn_10k,10)
+        deselect(btn_20k,20)
+        deselect(btn_25k,25)
+        deselect(btn_50k,50)
+        deselect(btn_100k,100)
+        deselect(btn_200k,200)
+
+    }
+
+    private fun activeate_tombol() {
+        if (top10k || top20k || top25k || top50k || top100k || top100k || top200k) {
+            btn_topup.visibility = View.VISIBLE
+        } else {
+            btn_topup.visibility = View.INVISIBLE
+        }
+    }
+
+
+
     private fun select(now: TextView, nominal: Int) {
         now.setTextColor(resources.getColor(R.color.pink))
         now.setBackgroundResource(R.drawable.shape_rectangle_line_pink)
@@ -116,14 +184,6 @@ class TopupActivity : AppCompatActivity() {
 
     }
 
-    private fun activeate_tombol() {
-        if (top10k || top20k || top25k || top50k || top100k || top100k || top200k) {
-            btn_topup.visibility = View.VISIBLE
-        } else {
-            btn_topup.visibility = View.INVISIBLE
-        }
-    }
-
     private fun deselect(now: TextView, nominal: Int) {
         now.setTextColor(resources.getColor(R.color.putih))
         now.setBackgroundResource(R.drawable.shape_rectangle_line_putih)
@@ -132,7 +192,7 @@ class TopupActivity : AppCompatActivity() {
             10 -> top10k = false
             20 -> top20k = false
             25 -> top25k = false
-            50 -> top25k = false
+            50 -> top50k = false
             100 -> top100k = false
             200 -> top200k = false
             else -> ""
@@ -142,6 +202,10 @@ class TopupActivity : AppCompatActivity() {
 
     private fun updatesaldo(username: String) {
         var total = 0
+
+        var input = et_number.text.toString().toInt()
+
+        total=input
 
         if (top10k) total += 10000
         if (top20k) total += 20000

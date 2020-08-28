@@ -100,7 +100,7 @@ class CheckoutActivity : AppCompatActivity() {
 
             pushQueue(total) //push transaksi ke firebase
             pushKursi() //push kursi ke history
-            pushTiket() //push tiket ke history
+            //pushTiket() //push tiket ke history
 
 
         } else{
