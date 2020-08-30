@@ -80,7 +80,7 @@ class SignUpPhoto : AppCompatActivity() {
 
             setPreferences()
             user.url = ""
-            mDatabaseReference.child(user.username!!).setValue(user)
+            mDatabaseReference.child(user.username!!).child("datadiri").setValue(user)
 
             finishAffinity()
             startActivity(Intent(this@SignUpPhoto, HomeActivity::class.java))
@@ -114,7 +114,7 @@ class SignUpPhoto : AppCompatActivity() {
                         preferences.setValue("status", "1")
 
                         setPreferences()
-                        mDatabaseReference.child(user.username!!).setValue(user)
+                        mDatabaseReference.child(user.username!!).child("datadiri").setValue(user)
 
                         finishAffinity()
                         startActivity(Intent(this@SignUpPhoto, HomeActivity::class.java))

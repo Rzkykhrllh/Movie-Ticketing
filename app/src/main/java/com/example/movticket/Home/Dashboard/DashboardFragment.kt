@@ -55,7 +55,11 @@ class DashboardFragment : Fragment() {
             .apply(RequestOptions.circleCropTransform())
             .into(img_profile)
 
+        rv_now.addItemDecoration(DefaultItemDecorator(14,0,1))
         rv_now.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) //ngeset recycler view
+
+
+        rv_coming.addItemDecoration(DefaultItemDecorator(0,14,0))
         rv_coming.layoutManager = LinearLayoutManager(context) //set recylerview vertical
 
 

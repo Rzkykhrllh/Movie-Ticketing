@@ -99,8 +99,8 @@ class CheckoutActivity : AppCompatActivity() {
                 .updateChildren(map as Map<String, Any>)
 
             pushQueue(total) //push transaksi ke firebase
-            pushKursi() //push kursi ke history
-            //pushTiket() //push tiket ke history
+            //pushKursi() //push kursi ke history
+            pushTiket() //push tiket ke history
 
 
         } else{

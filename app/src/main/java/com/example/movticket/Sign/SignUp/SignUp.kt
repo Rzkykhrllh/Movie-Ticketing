@@ -3,6 +3,7 @@ package com.example.movticket.Sign.SignUp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.movticket.R
 import com.example.movticket.Sign.User
@@ -30,6 +31,7 @@ class SignUp : AppCompatActivity() {
         mFirebasInstancee = FirebaseDatabase.getInstance()
         mDatabase = FirebaseDatabase.getInstance().getReference()
         mDatabaseReference = mFirebasInstancee.getReference("User") // ambil data di folder "User" pada Databse
+
 
         btn_daftar.setOnClickListener {
             sUsername = et_username.text.toString()
@@ -93,10 +95,10 @@ class SignUp : AppCompatActivity() {
                     var user = dataSnapshot.getValue(User::class.java)
 
 
+                    var nama = username
                     //Apabila username sudah digunakan  oleh pengguna lain
                     if (user == null){
                         //belum pernah dibuat
-                        mDatabaseReference.child(username).setValue(data) //upload data ke firebase
 
                         startActivity(Intent(this@SignUp, SignUpPhoto::class.java)
                             .putExtra("nama", data.nama)

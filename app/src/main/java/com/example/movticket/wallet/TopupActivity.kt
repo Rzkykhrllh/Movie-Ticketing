@@ -203,9 +203,11 @@ class TopupActivity : AppCompatActivity() {
     private fun updatesaldo(username: String) {
         var total = 0
 
-        var input = et_number.text.toString().toInt()
+        var input = et_number.text.toString()
+        if (input!=""){
+            total=input.toInt()
+        }
 
-        total=input
 
         if (top10k) total += 10000
         if (top20k) total += 20000

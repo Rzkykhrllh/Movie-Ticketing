@@ -2,6 +2,7 @@ package com.example.movticket.Sign
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movticket.Home.HomeActivity
@@ -51,6 +52,7 @@ class Signin : AppCompatActivity() {
                     et_pass.error = "Silahkan masukan password anda" //ngasih muncul peringatan bahwa teksnya kosong
                     et_pass.requestFocus() //biar fokus
                 } else {
+                    Log.d("Login","Login diproses")
                     pushLogin(iUsername, iPassword)
                 }
         }
@@ -61,7 +63,7 @@ class Signin : AppCompatActivity() {
 
     private fun pushLogin(username: String, pass: String) {
 
-        database.child(username).addValueEventListener(
+        database.child(username).child("datadiri").addValueEventListener(
 
             object : ValueEventListener {
 
@@ -72,13 +74,17 @@ class Signin : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                     //User adalah sebuah class untuk menyimpang nilai dari user dari database, karena didatabse isi class user ada nama, email dkk
-                    var user = dataSnapshot.getValue(User::class.java)
+
+                    Log.d("Login","Masih Lancar")
+                    var user = dataSnapshot.child("datadiri").getValue(User::class.java)
+                    Log.d("Login","Masih Lancar")
 
                     if (user == null) {
                         Toast.makeText( this@Signin, "User tidak ditemukan", Toast.LENGTH_LONG).show()
                         //Length_long : toastnya muncul lama
                     } else {
                         if (user.password.equals(pass)) { //sukses
+
 
                             //mengambil data dari server, supaya nanti gak perlu login lagi
                             preferences.setValue("nama", user.nama.toString())

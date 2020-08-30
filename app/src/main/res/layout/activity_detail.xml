@@ -23,11 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:text="Violet Evegarden : The Movie"
+        tools:text="Violet Evegden"
         android:drawablePadding="20dp"
         android:textColor="@color/putih"
-        android:textSize="18sp"
-        android:fontFamily="@font/montserrat_medium"
+        android:textSize="24sp"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_poster" />
 
@@ -75,8 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
-        android:textSize="14sp"
-        android:fontFamily="@font/montserrat_regular"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat_semibold"
         android:text="Story Board"
         android:textColor="@color/putih"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,35 +91,37 @@
         android:layout_marginEnd="24dp"
         android:text="After the aftermath of a war, a young girl who  was used as a 'tool' for war learned to live. With the scars of burns , she goes back to her  past to feel the true feelings of the Major's , &quot;I love you.&quot; "
         android:textColor="@color/putih"
-        android:fontFamily="@font/montserrat_light"
-        android:textSize="12sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="Who's Behind"
-        android:textColor="@color/putih"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView17"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Who's Behind"-->
+<!--        android:textSize="20sp"-->
+<!--        android:fontFamily="@font/montserrat_semibold"-->
+<!--        android:textColor="@color/putih"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_desc" />-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_who"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="24dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
-        tools:listitem="@layout/row_item_plays"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rv_who"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        tools:listitem="@layout/row_item_plays"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView17" />-->
 
     <Button
         android:id="@+id/btn_pilih_bangku"
