@@ -15,12 +15,49 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //make viewpager, bisa swipe dan click
+        //swipe
+        frame_layout.adapter = FragmentAdapter(supportFragmentManager)
+
+        //bisa-click
+        //awal
+        frame_layout.setCurrentItem(0, true)
+        changeIcon(btn_menu1,R.drawable.menu_true)
+
+
+        //clicked
+        btn_menu1.setOnClickListener{
+            frame_layout.setCurrentItem(0,true)
+            changeIcon(btn_menu1, R.drawable.menu_true)
+            changeIcon(btn_menu2, R.drawable.tiket_false)
+            changeIcon(btn_menu3, R.drawable.profile_false)
+
+        }
+        btn_menu2.setOnClickListener{
+            frame_layout.setCurrentItem(1,true)
+            changeIcon(btn_menu1, R.drawable.menu_false)
+            changeIcon(btn_menu2, R.drawable.tiket_true)
+            changeIcon(btn_menu3, R.drawable.profile_false)
+        }
+
+        btn_menu3.setOnClickListener{
+            frame_layout.setCurrentItem(2,true)
+            changeIcon(btn_menu1, R.drawable.menu_false)
+            changeIcon(btn_menu2, R.drawable.tiket_false)
+            changeIcon(btn_menu3, R.drawable.profile_true)
+        }
+
+
+
+
+        //make frameview, tapi klik2
+/*
         //set default fragment
         val fragmentHome = DashboardFragment()
         changeIcon(btn_menu1, R.drawable.menu_true)
-        setFragment(fragmentHome)
+        setFragment(fragmentHome)*/
 
-        btn_menu1.setOnClickListener {
+        /*btn_menu1.setOnClickListener {
             setFragment(DashboardFragment())
             changeIcon(btn_menu1, R.drawable.menu_true)
             changeIcon(btn_menu2, R.drawable.tiket_false)
@@ -39,7 +76,8 @@ class HomeActivity : AppCompatActivity() {
             changeIcon(btn_menu1, R.drawable.menu_false)
             changeIcon(btn_menu2, R.drawable.tiket_false)
             changeIcon(btn_menu3, R.drawable.profile_true)
-        }
+        }*/
+
 
 
     }

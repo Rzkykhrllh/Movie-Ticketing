@@ -37,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
             .load(data.poster)
             .into(img_poster)
 
-        rv_who.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        //rv_who.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         getdata()
 
         btn_pilih_bangku.setOnClickListener {
@@ -64,9 +64,9 @@ class DetailActivity : AppCompatActivity() {
                     datalist.add(play!!)
                 }
 
-                rv_who.adapter =
+                /*rv_who.adapter =
                     playAdapter(datalist) {
-                    }
+                    }*/
             }
 
         })
