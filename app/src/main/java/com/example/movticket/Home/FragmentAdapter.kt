@@ -19,14 +19,16 @@ class FragmentAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
     )
 
     override fun getItem(position: Int): Fragment {
-        return pages[position]
+        return when (position) {
+            0 ->  DashboardFragment()
+            1 ->  TiketFragment()
+            2 ->  setting()
+            else -> DashboardFragment()
+        }
     }
 
     override fun getCount(): Int {
         return pages.size
     }
 
-    private fun changeIcon(imageView: ImageView, int: Int){
-        imageView.setImageResource(int)
-    }
 }

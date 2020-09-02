@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.example.movticket.Home.Dashboard.*
 import com.example.movticket.Home.Tiket.TiketFragment
 import com.example.movticket.Home.setting.setting
@@ -17,37 +19,41 @@ class HomeActivity : AppCompatActivity() {
 
         //make viewpager, bisa swipe dan click
         //swipe
+
+        btn_menu1.setOnClickListener {
+            frame_layout.currentItem = 0
+
+        }
+        btn_menu2.setOnClickListener {
+            frame_layout.currentItem = 1
+        }
+
+        btn_menu3.setOnClickListener {
+            frame_layout.currentItem = 2
+        }
+
         frame_layout.adapter = FragmentAdapter(supportFragmentManager)
+        frame_layout.offscreenPageLimit = 2
 
-        //bisa-click
-        //awal
-        frame_layout.setCurrentItem(0, true)
+        frame_layout.addOnPageChangeListener(
+            object :ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    changeTab(position)
+                }
+            }
+        )
+        frame_layout.currentItem = 0
         changeIcon(btn_menu1,R.drawable.menu_true)
-
-
-        //clicked
-        btn_menu1.setOnClickListener{
-            frame_layout.setCurrentItem(0,true)
-            changeIcon(btn_menu1, R.drawable.menu_true)
-            changeIcon(btn_menu2, R.drawable.tiket_false)
-            changeIcon(btn_menu3, R.drawable.profile_false)
-
-        }
-        btn_menu2.setOnClickListener{
-            frame_layout.setCurrentItem(1,true)
-            changeIcon(btn_menu1, R.drawable.menu_false)
-            changeIcon(btn_menu2, R.drawable.tiket_true)
-            changeIcon(btn_menu3, R.drawable.profile_false)
-        }
-
-        btn_menu3.setOnClickListener{
-            frame_layout.setCurrentItem(2,true)
-            changeIcon(btn_menu1, R.drawable.menu_false)
-            changeIcon(btn_menu2, R.drawable.tiket_false)
-            changeIcon(btn_menu3, R.drawable.profile_true)
-        }
-
-
 
 
         //make frameview, tapi klik2
@@ -76,13 +82,33 @@ class HomeActivity : AppCompatActivity() {
             changeIcon(btn_menu1, R.drawable.menu_false)
             changeIcon(btn_menu2, R.drawable.tiket_false)
             changeIcon(btn_menu3, R.drawable.profile_true)
-        }*/
-
+        }
+        */
 
 
     }
 
-    private fun setFragment(fragment_tujuan: Fragment){
+    private fun changeTab(i: Int) {
+        if (i == 0) {
+            changeIcon(btn_menu1, R.drawable.menu_true)
+            changeIcon(btn_menu2, R.drawable.tiket_false)
+            changeIcon(btn_menu3, R.drawable.profile_false)
+        }
+        if (i == 1) {
+            changeIcon(btn_menu1, R.drawable.menu_false)
+            changeIcon(btn_menu2, R.drawable.tiket_true)
+            changeIcon(btn_menu3, R.drawable.profile_false)
+        }
+        if (i == 2) {
+            changeIcon(btn_menu1, R.drawable.menu_false)
+            changeIcon(btn_menu2, R.drawable.tiket_false)
+            changeIcon(btn_menu3, R.drawable.profile_true)
+        }
+        }
+
+
+
+    /*private fun setFragment(fragment_tujuan: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransient = fragmentManager.beginTransaction()
         fragmentTransient.replace(R.id.frame_layout, fragment_tujuan) //masang fragment baru ke frame_layout
@@ -91,7 +117,11 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun changeIcon(imageView: ImageView, int: Int){
+     */
+
+    private fun changeIcon(imageView: ImageView, int: Int) {
         imageView.setImageResource(int)
     }
+
+
 }
