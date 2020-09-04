@@ -36,21 +36,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/menu_false" />
+            android:src="@drawable/home_nonactive" />
 
         <ImageView
             android:id="@+id/btn_menu2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/tiket_false" />
+            android:src="@drawable/tiket_nonactive" />
 
         <ImageView
             android:id="@+id/btn_menu3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/profile_false" />
+            android:src="@drawable/profile_nonactive" />
 
     </LinearLayout>
 

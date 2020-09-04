@@ -37,9 +37,10 @@ class WalletAdapter(private var data: List<wallet>,
 
             if (data.status.equals("0")){
                 tvMoney.text = "-"+formatRupiah.format(data.money)
+                tvMoney.setTextColor(Color.RED)
             } else{
                 tvMoney.text = "+"+formatRupiah.format(data.money)
-                tvMoney.setTextColor(Color.GREEN)
+
             }
 
             itemView.setOnClickListener {

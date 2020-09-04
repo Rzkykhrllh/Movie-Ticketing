@@ -359,6 +359,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
+            android:text="Booked"
             android:textColor="@color/putih"
             android:textSize="12sp" />
 

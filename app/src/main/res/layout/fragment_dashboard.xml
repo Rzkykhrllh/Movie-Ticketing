@@ -18,25 +18,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="34dp"
-            tools:text="Rizky Khaiullah"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/putih"
             android:textSize="24sp"
-            android:fontFamily="@font/montserrat_bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Rizky Khaiullah" />
 
         <TextView
             android:id="@+id/tv_saldo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            tools:text="IDR 300.000"
+            android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/putih"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginLeft="10dp"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nama" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama"
+            tools:text="IDR 300.000" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -112,6 +112,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12"
             tools:listitem="@layout/row_item_coming_soon" />
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/biruabu">
+    android:background="@color/bgbiru">
 
 
     <TextView
         android:id="@+id/tv_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Fire Force"
         android:textColor="@color/putih"
         android:fontFamily="@font/montserrat_bold"
@@ -27,6 +26,8 @@
         android:fontFamily="@font/montserrat_regular"
         android:text="Sabtu, 9 Juli 2021"
         android:textColor="@color/putih"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_movie" />
 
@@ -34,12 +35,11 @@
         android:id="@+id/tv_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="-IDR 35.000"
         android:textColor="@color/pink"
         android:textColorHighlight="#FFFFFF"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:fontFamily="@font/montserrat_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

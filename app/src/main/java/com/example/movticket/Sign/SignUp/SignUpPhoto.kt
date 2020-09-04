@@ -22,6 +22,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import kotlinx.android.synthetic.main.activity_sign_up_photo.*
 import java.util.*
 import android.app.ProgressDialog
+import android.os.Build
 import android.util.Log
 import com.example.movticket.Sign.User
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -42,9 +43,26 @@ class SignUpPhoto : AppCompatActivity() {
     lateinit var uname : String
 
 
+    var currentApiVersion = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        currentApiVersion = Build.VERSION.SDK_INT
+        val flags: Int = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
+            window.decorView.systemUiVisibility = flags
+            val decorView: View = window.decorView
+            decorView.setOnSystemUiVisibilityChangeListener { visibility ->
+                if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN === 0) {
+                    decorView.systemUiVisibility = flags
+                }
+            }
+        }
+
         setContentView(R.layout.activity_sign_up_photo)
 
         preferences = Prefences(this)
@@ -206,5 +224,16 @@ class SignUpPhoto : AppCompatActivity() {
             //Toast.makeText(this, "task cancelled", Toast.LENGTH_LONG).show()
         }
 
+    }
+
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
     }
 }

@@ -45,8 +45,8 @@
         android:paddingHorizontal="24sp"
         android:text="@string/on_boarding_three_msg"
         android:textColor="@color/putih"
-        android:textSize="16sp"
-        android:fontFamily="@font/montserrat_light"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

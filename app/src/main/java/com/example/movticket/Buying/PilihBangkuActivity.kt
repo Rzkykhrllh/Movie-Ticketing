@@ -1,6 +1,7 @@
 package com.example.movticket.Buying
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,13 +31,26 @@ class PilihBangkuActivity : AppCompatActivity() {
     var statusD3 = false
     var statusD4 = false
     var total = 0
-
+    var currentApiVersion = 0
     var judul = ""
 
     private var datalist = ArrayList<Checkout>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val flags: Int = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
+            window.decorView.systemUiVisibility = flags
+            val decorView: View = window.decorView
+            decorView.setOnSystemUiVisibilityChangeListener { visibility ->
+                if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN === 0) {
+                    decorView.systemUiVisibility = flags
+                }
+            }
+        }
         setContentView(R.layout.activity_pilih_bangku)
 
         val data : Film = intent.getParcelableExtra<Film>("data")
@@ -236,6 +250,16 @@ class PilihBangkuActivity : AppCompatActivity() {
         } else{
             btn_pilih.text = "BELI TIKET($total)"
             btn_pilih.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         }
     }
 }

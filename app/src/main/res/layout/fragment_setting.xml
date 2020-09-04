@@ -29,6 +29,7 @@
         android:layout_marginStart="24dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Keep it up to date"
+        android:textSize="16sp"
         android:textColor="@color/putih"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_setting" />
